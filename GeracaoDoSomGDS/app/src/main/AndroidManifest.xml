@@ -20,9 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".telacalendario" />
-        <activity android:name=".loginBanda" />
-        <activity android:name=".telacadastro"></activity>
+        <activity android:name=".telacalendario" >
+         android:parentActivityName=".telaprincipal"
+        </activity>
+        <activity android:name=".loginBanda" android:parentActivityName=".telaprincipal" />
+        <activity android:name=".telacadastro" android:parentActivityName=".telaprincipal" />
+        <activity android:name=".teladiaevento" android:parentActivityName=".telacalendario"></activity>
+        <activity android:name=".telaReserva" android:parentActivityName=".telaReserva"></activity>
     </application>
 
 </manifest>

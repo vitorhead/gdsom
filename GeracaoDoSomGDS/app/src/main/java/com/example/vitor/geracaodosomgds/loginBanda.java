@@ -21,11 +21,12 @@ public class loginBanda extends AppCompatActivity {
         // definimos 2 strings com login e senha padrao e fuckit. depois disso é só chamar a outra tela \/
         //Intent intent = new Intent(loginBanda.this, //proximatela.class);
         //startactivity(intent);
+        //finish();
     }
 
     public void abrirCadastro(View view)
     {
         Intent intent = new Intent(loginBanda.this, telacadastro.class);
-        startActivity(intent);
+
     }
 }

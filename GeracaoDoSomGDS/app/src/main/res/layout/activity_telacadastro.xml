@@ -22,7 +22,7 @@
         android:text="Digite o email para o cadastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtNome"
+        android:layout_below="@+id/txtNomeReserva"
         android:id="@+id/lblEmail"
         android:layout_marginTop="26dp"/>
 
@@ -70,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:id="@+id/txtNome"
+        android:id="@+id/txtNomeReserva"
         android:layout_below="@+id/lblNome"
         android:layout_alignParentStart="true" />
 

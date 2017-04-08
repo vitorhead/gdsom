@@ -19,8 +19,6 @@ public class telaprincipal extends Activity {
         setContentView(R.layout.activity_telaprincipal);
         ImageView imgLogo = (ImageView) findViewById(R.id.imgLogo);
         imgLogo.setVisibility(View.VISIBLE);
-
-
     }
 
     public void abreCalendario(View view) {

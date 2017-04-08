@@ -16,7 +16,7 @@
         android:id="@+id/cvCalendarioGDS"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:minDate="06/01/2017" />
+       />
 
     <LinearLayout
         android:orientation="vertical"
@@ -49,7 +49,7 @@
             android:layout_margin="4dp"/>
 
         <TextView
-            android:text="• wowo banda lala"
+            android:text="@string/wowo_banda_lala"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtArtista"
