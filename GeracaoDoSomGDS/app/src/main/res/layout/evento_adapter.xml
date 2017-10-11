@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Evento 1"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:textSize="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/lblEventoAdapterTitulo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:textSize="16dp"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/lblEventoAdapterTitulo"
+        android:id="@+id/lblEventoAdapterData"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="quantidade de ingressos"
+        android:textSize="16dp"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/lblEventoAdapterData"
+        android:layout_below="@+id/lblEventoAdapterTitulo"
+        android:id="@+id/lblEventoAdapterIng"/>
+
+</RelativeLayout>

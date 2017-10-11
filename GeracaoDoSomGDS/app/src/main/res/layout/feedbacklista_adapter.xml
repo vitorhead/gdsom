@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:textSize="40dp"
+        android:id="@+id/lblTipoFeedback"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="descricao do feedback"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:textSize="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/lblDsFeedback_Lista"
+        android:layout_toRightOf="@+id/lblTipoFeedback"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="recebido em dd/mm/aaaa"
+        android:textSize="16dp"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/lblDsFeedback_Lista"
+        android:id="@+id/lblDataFeedback_FeedbackLista"
+        android:layout_toRightOf="@+id/lblTipoFeedback"/>
+
+
+</RelativeLayout>

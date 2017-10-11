@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mail_black_24dp"
+        android:background="@color/icons"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Convite 1"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:textSize="20dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/lblConviteAdapterTitulo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dia 28/06/2017"
+        android:textSize="16dp"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="46dp"
+        android:layout_below="@id/lblConviteAdapterTitulo"
+        android:layout_toRightOf="@+id/imgConviteAdapter"
+        android:id="@+id/lblConviteAdapterDia"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="às 21:00 hrs"
+        android:textSize="16dp"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/lblConviteAdapterDia"
+        android:layout_below="@id/lblConviteAdapterTitulo"
+        android:id="@+id/lblConviteAdapterHora"/>
+
+</RelativeLayout>

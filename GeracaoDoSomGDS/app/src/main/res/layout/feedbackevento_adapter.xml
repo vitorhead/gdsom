@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/newlogogds"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/imgBanda_FeedBackEvento"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nomedabanda"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:textSize="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/lblNomeBanda_FeedbackEvento"
+        android:layout_toRightOf="@+id/imgBanda_FeedBackEvento"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dia 28/06/2017"
+        android:textSize="16dp"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/lblNomeBanda_FeedbackEvento"
+        android:id="@+id/lblDataEvento_FeedbackEvento"
+        android:layout_toRightOf="@+id/imgBanda_FeedBackEvento"/>
+
+</RelativeLayout>

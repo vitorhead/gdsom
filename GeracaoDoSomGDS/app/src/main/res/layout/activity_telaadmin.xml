@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.vitor.geracaodosomgds.RecursosAdmin.telaadmin"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtBoasVindas"
+        android:text="Olá ...     Bem vindo! \n           O que deseja fazer?"
+        android:textSize="30dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADICIONAR EVENTO"
+        android:id="@+id/btnAddEvento"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONVIDAR BANDA"
+        android:id="@+id/btnConvidarBanda"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VISUALIZAR FEEDBACKS"
+        android:id="@+id/btnVisualizarFeedbacks"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CANCELAR RESERVA"
+        android:id="@+id/btnCancelarReserva"/>
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="LIMPAR TUDO - DEV"-->
+        <!--android:id="@+id/btnLimpar"/>-->
+
+</LinearLayout>
