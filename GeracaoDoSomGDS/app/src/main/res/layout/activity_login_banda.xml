@@ -10,15 +10,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.vitor.geracaodosomgds.loginBanda">
 
+    <TextView
+        android:text="Entre e confira os convites para apresentações"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtInfo"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="8dp"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/txtEmailBanda"
+        android:text="Email da Banda"
+        android:layout_below="@+id/txtInfo"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="8dp" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/txtInfo"
+        android:paddingLeft="8dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/txtEmailBanda"
         android:id="@+id/txtEmail" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/txtSenhaBanda"
+        android:text="Senha"
+        android:layout_above="@+id/txtSenha"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="8dp"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -27,7 +58,9 @@
         android:ems="10"
         android:layout_below="@+id/txtEmail"
         android:layout_alignStart="@+id/txtEmail"
-        android:id="@+id/txtSenha" />
+        android:id="@+id/txtSenha"
+        android:paddingLeft="8dp"
+        />
 
     <Button
         android:text="ENTRAR"
@@ -36,25 +69,24 @@
         android:id="@+id/btnEntrar"
         android:layout_below="@+id/txtSenha"
         android:layout_alignParentStart="true"
-        android:onClick="entrarClick"/>
+        android:layout_marginTop="10dp"
+        android:paddingLeft="8dp"/>
 
-    <TextView
-        android:text="aqui você pode entrar com a sua banda para poder solicitar um show em algum dia reservado. é importante enviar os dados corretos e uma demonstração do som =)"
-        android:layout_width="wrap_content"
+    <Button
+        android:text="ESQUECI MINHA SENHA"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtInfo"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="8dp"
-        android:padding="8dp"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:textStyle="normal|bold" />
+        android:id="@+id/btnEsqueciSenha"
+        android:layout_below="@+id/btnEntrar"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="8dp"/>
+
 
     <Button
         android:text="NÃO POSSUI UMA CONTA? CADASTRE-SE!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnEntrar"
+        android:layout_below="@+id/btnEsqueciSenha"
         android:id="@+id/btnCadastro"
-        android:onClick="abrirCadastro"/>
+        android:paddingLeft="8dp"/>
 </RelativeLayout>

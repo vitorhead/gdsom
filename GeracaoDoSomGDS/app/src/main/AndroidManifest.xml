@@ -6,10 +6,12 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:debuggable="true"
+        android:icon="@drawable/newlogogds"
         android:label="GERAÇÃO DO SOM"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -20,13 +22,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".telacalendario" >
-         android:parentActivityName=".telaprincipal"
+        <activity android:name=".telacalendario">
+            android:parentActivityName=".telaprincipal"
         </activity>
-        <activity android:name=".loginBanda" android:parentActivityName=".telaprincipal" />
-        <activity android:name=".telacadastro" android:parentActivityName=".telaprincipal" />
-        <activity android:name=".teladiaevento" android:parentActivityName=".telacalendario"></activity>
-        <activity android:name=".telaReserva" android:parentActivityName=".telaReserva"></activity>
+        <activity
+            android:name=".loginBanda"
+            android:parentActivityName=".telaprincipal" />
+        <activity
+            android:name=".telacadastro"
+            android:parentActivityName=".telaprincipal" />
+        <activity
+            android:name=".teladiaevento"
+            android:parentActivityName=".telacalendario" />
+        <activity
+            android:name=".telaReserva"
+            android:parentActivityName=".telaReserva" />
+        <activity
+            android:name=".perfilbanda"
+            android:label="MEU PERFIL"
+            android:parentActivityName=".loginBanda"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".telaconvitesbanda" />
+        <activity android:name=".RecursosAdmin.telaadmin" />
+        <activity android:name=".RecursosAdmin.telaadmin_eventos" />
+        <activity android:name=".telafeedback" />
+        <activity android:name=".RecursosAdmin.telaadmin_listafeedback" />
+        <activity android:name=".RecursosAdmin.telaadmin_listareserva"></activity>
     </application>
 
 </manifest>
