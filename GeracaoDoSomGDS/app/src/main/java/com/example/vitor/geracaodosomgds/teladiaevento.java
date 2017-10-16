@@ -30,6 +30,7 @@ public class teladiaevento extends AppCompatActivity
 {
     TextView txtDia, txtArtistas, txtArtistaEvento, txtInfoEvento;
     int diaClicado, cdevento;
+    Button btnReserva;
     String dtevento, qtdeingressos;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,7 +44,7 @@ public class teladiaevento extends AppCompatActivity
         qtdeingressos = getIntent().getExtras().getString("qtdeingressos");
         editaEvento(diaClicado);
 
-        Button btnReserva = (Button) findViewById(R.id.btnReserva);
+        btnReserva = (Button) findViewById(R.id.btnReserva);
         btnReserva.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -163,7 +164,24 @@ public class teladiaevento extends AppCompatActivity
                 txtDia.setText(""+diaClicado);
                 txtArtistas.setText(formatar.get(0));
                 txtArtistaEvento.setText(formatar.get(1));
-                txtInfoEvento.setText(formatar.get(2)); // status
+                String infoEvento;
+                switch(formatar.get(2))
+                {
+                    case "AG":
+                         infoEvento = "aguardando confirmação";
+                        break;
+                    case "S":
+                        infoEvento = "confirmado";
+                        break;
+                    case "N":
+                        infoEvento = "recusado";
+                        btnReserva.setEnabled(false);
+                        break;
+                    default:
+                        infoEvento = "aguardando confirmação";
+                        break;
+                }
+                txtInfoEvento.setText(infoEvento); // status
 
         }
 //        }

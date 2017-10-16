@@ -7,6 +7,7 @@ import android.database.Cursor;
 import com.example.vitor.geracaodosomgds.BancoDeDados.setupBanco;
 import com.example.vitor.geracaodosomgds.Modelos.ReservaLista_Model;
 import com.example.vitor.geracaodosomgds.Modelos.ReservaModel;
+import com.example.vitor.geracaodosomgds.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,10 +87,10 @@ public class ReservaRepo {
         }
     }
 
-    public void deletaReserva(String CPF)
+    public void deletaReserva(String idReserva)
     {
-        String[] argumentos = new String[]{CPF} ;
-        sb.getConexaoDB().delete("dbo_gds_reservas", "cpf", argumentos);
+        String[] argumentos = new String[]{idReserva} ;
+        sb.getConexaoDB().delete("dbo_gds_reservas", "idreserva = ?", argumentos);
     }
 
     public List<ReservaLista_Model> selectReservas_Lista ()
@@ -97,7 +98,7 @@ public class ReservaRepo {
         List<ReservaLista_Model> reservas = new ArrayList<>();
         try {
             StringBuilder query = new StringBuilder();
-            query.append(   "SELECT R.nome, R.cpf, B.nome nomeBanda, E.dtevento\n" +
+            query.append(   "SELECT R.nome, R.cpf, B.nome nomeBanda, E.dtevento, R.idreserva\n" +
                             "FROM dbo_gds_reservas R\n" +
                             "JOIN dbo_gds_apresentacoes A\n" +
                             "ON A.cdevento = R.cdevento\n" +
@@ -112,6 +113,7 @@ public class ReservaRepo {
 
             while (!cursor.isAfterLast()) {
                 reservaModel = new ReservaLista_Model();
+                reservaModel.setIdReserva(cursor.getString(cursor.getColumnIndex("idreserva")));
                 reservaModel.setNome(cursor.getString(cursor.getColumnIndex("nome")));
                 reservaModel.setCPF(cursor.getString(cursor.getColumnIndex("cpf")));
                 reservaModel.setDtEvento(cursor.getString(cursor.getColumnIndex("dtevento")));
@@ -125,4 +127,20 @@ public class ReservaRepo {
         }
         return reservas;
     }
+
+    public void updateReserva(String idReserva, String nome, String CPF)
+    {
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put("nome", nome);
+            values.put("cpf", CPF);
+
+            sb.getConexaoDB().update("dbo_gds_reservas", values, "idreserva = ?", new String[]{idReserva});
+        }
+        finally {
+            sb.close();
+        }
+    }
 }
+

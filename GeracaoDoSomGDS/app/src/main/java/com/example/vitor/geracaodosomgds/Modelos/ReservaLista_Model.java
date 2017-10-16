@@ -9,6 +9,7 @@ public class ReservaLista_Model {
     private String nome;
     private String dtEvento;
     private String nomeBanda;
+    private String idReserva;
 
 
     public String getCPF() {
@@ -41,5 +42,13 @@ public class ReservaLista_Model {
 
     public void setNomeBanda(String nomeBanda) {
         this.nomeBanda = nomeBanda;
+    }
+
+    public String getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(String idReserva) {
+        this.idReserva = idReserva;
     }
 }

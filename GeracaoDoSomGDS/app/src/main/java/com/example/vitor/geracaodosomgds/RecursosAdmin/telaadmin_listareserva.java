@@ -36,6 +36,7 @@ public class telaadmin_listareserva extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telaadmin_listareserva);
+        getSupportActionBar().setTitle("ADMINISTRAR RESERVAS");
         reservas = new ReservaRepo(getApplicationContext()).selectReservas_Lista();
         if (reservas.size() <= 0)
         {
@@ -63,7 +64,7 @@ public class telaadmin_listareserva extends AppCompatActivity {
             myView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), myView, new RecyclerTouchListener.ClickListener() {
                 @Override
                 public void onClick(View view, int position) {
-                    mostraReserva();
+                    mostraReserva(position);
                 }
 
                 @Override
@@ -74,19 +75,26 @@ public class telaadmin_listareserva extends AppCompatActivity {
         }
     }
 
-    public void mostraReserva()
+    public void mostraReserva(final Integer position)
     {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setTitle("RESERVA");
-        b.setMessage("Informe o CPF que deseja cancelar a reserva");
+        b.setMessage("Efetua as alterações necessárias e clique em OK para confirmar");
         LinearLayout ll_dialogo = new LinearLayout(this);
         ll_dialogo.setOrientation(LinearLayout.VERTICAL);
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.setMargins(80, 0, 80, 0);
 
+        final EditText edtNome = new EditText(this);
+        edtNome.setHint("Nome completo");
+        edtNome.setText(reservas.get(position).getNome());
+        edtNome.setTextSize(18f);
+        ll_dialogo.addView(edtNome, lp);
+
         final EditText edtCPF = new EditText(this);
         edtCPF.setHint("CPF (apenas números)");
+        edtCPF.setText(reservas.get(position).getCPF());
         edtCPF.setTextSize(18f);
         edtCPF.setInputType(InputType.TYPE_CLASS_NUMBER);
         ll_dialogo.addView(edtCPF, lp);
@@ -94,9 +102,9 @@ public class telaadmin_listareserva extends AppCompatActivity {
         b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (edtCPF.equals("") )
+                if (edtCPF.equals("") || edtNome.equals("") )
                 {
-                    Toast.makeText(getApplicationContext(), "INFORME O CPF!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Preencha os campos!", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -106,17 +114,27 @@ public class telaadmin_listareserva extends AppCompatActivity {
                     {
                         if (new ReservaRepo(getApplicationContext()).reservaExiste(edtCPF.getText().toString()))
                         {
-                            //deletar
-                            new ReservaRepo(getApplicationContext()).deletaReserva(edtCPF.getText().toString());
+                            new ReservaRepo(getApplicationContext()).updateReserva(reservas.get(position).getIdReserva(), edtNome.getText().toString().trim(), edtCPF.getText().toString().trim());
+                            myAdapter.notifyDataSetChanged();
                         }
                     }
                 }
             }
         });
 
-        b.setNegativeButton("VOLTAR", new DialogInterface.OnClickListener() {
+        b.setNegativeButton("CANCELAR RESERVA", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                new ReservaRepo(getApplicationContext()).deletaReserva(reservas.get(position).getIdReserva());
+                reservas.remove(position);
+                myAdapter.notifyDataSetChanged();
+            }
+        });
+
+        b.setNeutralButton("VOLTAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
             }
         });
 

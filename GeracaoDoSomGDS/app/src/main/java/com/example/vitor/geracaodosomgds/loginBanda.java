@@ -1,12 +1,15 @@
 package com.example.vitor.geracaodosomgds;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -69,7 +72,41 @@ public class loginBanda extends AppCompatActivity {
                 abrirCadastro();
             }
         });
+
+        if (!isOnline())
+        {
+            final AlertDialog.Builder b = new AlertDialog.Builder(this);
+            b.setTitle("ALERTA");
+            b.setMessage("Detectamos que seu telefone não está conectado na internet. \nComo fazemos o uso de algumas funções que requerem acesso a rede, solicitamos que ative a internet e depois volte para pode prosseguir no aplicativo.");
+            LinearLayout ll_dialogo = new LinearLayout(this);
+            ll_dialogo.setOrientation(LinearLayout.VERTICAL);
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(80, 0, 80, 0);
+
+            b.setPositiveButton("ENTENDIDO!", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            b.setView(ll_dialogo);
+            AlertDialog a = b.create();
+            a.show();
+        }
+
     }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
+    }
+
 
     public void abrirCadastro() {
         Intent intent = new Intent(loginBanda.this, telacadastro.class);
