@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -228,12 +229,18 @@ public class telacalendario extends AppCompatActivity {
         bFBApp.setPositiveButton("ENVIAR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                FeedbackModel f = new FeedbackModel();
-                f.setCd_tipo_feedback(2);
-                f.setDs_feedback(edtFeedback.getText().toString().trim().toLowerCase());
-                String dtAgora = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-                f.setDt_feedback(dtAgora);
-                new FeedbackRepo(getApplicationContext()).insertFeedback(f);
+                if (edtFeedback.getText().toString().trim().isEmpty()) {
+                    mensagem = Toast.makeText(getApplicationContext(), "PREENCHA O CAMPO ANTES DE ENVIAR O FEEDBACK!", Toast.LENGTH_SHORT);
+                    mensagem.show();
+                }
+                else {
+                    FeedbackModel f = new FeedbackModel();
+                    f.setCd_tipo_feedback(2);
+                    f.setDs_feedback(edtFeedback.getText().toString().trim().toLowerCase());
+                    String dtAgora = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+                    f.setDt_feedback(dtAgora);
+                    new FeedbackRepo(getApplicationContext()).insertFeedback(f);
+                }
             }
         });
 

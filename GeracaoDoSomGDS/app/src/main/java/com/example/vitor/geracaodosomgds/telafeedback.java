@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vitor.geracaodosomgds.Modelos.FeedbackModel;
 import com.example.vitor.geracaodosomgds.Repositorios.FeedbackRepo;
@@ -106,14 +107,18 @@ public class telafeedback extends AppCompatActivity {
         bFBApp.setPositiveButton("ENVIAR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                FeedbackModel f = new FeedbackModel();
-                f.setCd_tipo_feedback(1);
-                f.setDs_feedback(edtFeedback.getText().toString().trim().toLowerCase());
-                String dtAgora = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-                f.setDt_feedback(dtAgora);
-                f.setReserva_cd_evento(fClicado.getReserva_cd_evento());
-                f.setReserva_cpf_cliente(CPF);
-                new FeedbackRepo(getApplicationContext()).insertFeedback(f);
+                if (edtFeedback.getText().toString().trim().isEmpty())
+                    Toast.makeText(getApplicationContext(), "PREENCHA O CAMPO ANTES DE ENVIAR O FEEDBACK!", Toast.LENGTH_SHORT).show();
+                else {
+                    FeedbackModel f = new FeedbackModel();
+                    f.setCd_tipo_feedback(1);
+                    f.setDs_feedback(edtFeedback.getText().toString().trim().toLowerCase());
+                    String dtAgora = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+                    f.setDt_feedback(dtAgora);
+                    f.setReserva_cd_evento(fClicado.getReserva_cd_evento());
+                    f.setReserva_cpf_cliente(CPF);
+                    new FeedbackRepo(getApplicationContext()).insertFeedback(f);
+                }
             }
         });
 
