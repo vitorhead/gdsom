@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.vitor.geracaodosomgds.Modelos.ReservaLista_Model;
 import com.example.vitor.geracaodosomgds.R;
+import com.example.vitor.geracaodosomgds.Repositorios.ReservaRepo;
 
 import java.util.List;
 
@@ -45,11 +47,23 @@ public class ReservaLista_ProxEvento_Adapter extends RecyclerView.Adapter<Reserv
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        ReservaLista_Model reserva = reservas.get(position);
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+        final ReservaLista_Model reserva = reservas.get(position);
         holder.nome.setText(reserva.getNome());
         holder.cpf.setText(reserva.getCPF());
+
+        holder.chkReservaProxEvento.setOnCheckedChangeListener(null);
         holder.chkReservaProxEvento.setChecked(reserva.getCheckBoxReserva());
+        holder.chkReservaProxEvento.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                reserva.setCheckBoxReserva(isChecked);
+                if (isChecked)
+                    new ReservaRepo(holder.chkReservaProxEvento.getContext()).updateReservaCompareceu(reservas.get(position).getIdReserva(), true);
+                else
+                    new ReservaRepo(holder.chkReservaProxEvento.getContext()).updateReservaCompareceu(reservas.get(position).getIdReserva(), false);
+            }
+        });
     }
 
     @Override

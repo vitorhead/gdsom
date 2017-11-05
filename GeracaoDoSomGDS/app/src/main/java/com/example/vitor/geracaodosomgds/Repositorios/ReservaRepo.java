@@ -185,7 +185,7 @@ public class ReservaRepo {
                 reservaModel.setIdReserva(cursor.getString(cursor.getColumnIndex("idreserva")));
                 reservaModel.setNome(cursor.getString(cursor.getColumnIndex("nome")));
                 reservaModel.setCPF(cursor.getString(cursor.getColumnIndex("cpf")));
-                if (cursor.getString(cursor.getColumnIndex("compareceu")).equals("S"))
+                if (cursor.getString(cursor.getColumnIndex("compareceu")).trim().equals("S"))
                     reservaModel.setCheckBoxReserva(true);
                 else
                     reservaModel.setCheckBoxReserva(false);

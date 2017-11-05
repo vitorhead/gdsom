@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ public class telaadmin_reservas_proxevento extends AppCompatActivity {
     private List<ReservaLista_Model> reservas;
     private RecyclerView myView;
     private ReservaLista_ProxEvento_Adapter myAdapter;
+    private View view;
+    private CheckBox chkClicada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,12 @@ public class telaadmin_reservas_proxevento extends AppCompatActivity {
             myView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), myView, new RecyclerTouchListener.ClickListener() {
                 @Override
                 public void onClick(View view, int position) {
-                    new ReservaRepo(getApplicationContext()).updateReservaCompareceu(reservas.get(position).getIdReserva(), true);
+//                    view = myView.findViewHolderForAdapterPosition(position).itemView;
+//                    chkClicada = (CheckBox) view.findViewById(R.id.chkReservaProxEvento);
+//                    if (chkClicada.isChecked())
+//                        new ReservaRepo(getApplicationContext()).updateReservaCompareceu(reservas.get(position).getIdReserva(), true);
+//                    else
+//                        new ReservaRepo(getApplicationContext()).updateReservaCompareceu(reservas.get(position).getIdReserva(), false);
                 }
 
                 @Override
