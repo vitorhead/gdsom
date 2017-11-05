@@ -13,17 +13,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.vitor.geracaodosomgds.Modelos.EventoModel;
+import com.example.vitor.geracaodosomgds.Modelos.ProximoEventoModel;
 import com.example.vitor.geracaodosomgds.Modelos.ReservaModel;
 import com.example.vitor.geracaodosomgds.R;
 import com.example.vitor.geracaodosomgds.Repositorios.ApresentacaoRepo;
 import com.example.vitor.geracaodosomgds.Repositorios.EventoRepo;
+import com.example.vitor.geracaodosomgds.Repositorios.FeedbackRepo;
 import com.example.vitor.geracaodosomgds.Repositorios.ReservaRepo;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
@@ -34,17 +38,92 @@ import java.util.List;
 import static com.example.vitor.geracaodosomgds.teladiaevento.isCPF;
 
 public class telaadmin extends AppCompatActivity {
-    private Button btnAddEvento, btnConvidarBanda, btnLimparDev, btnCancelarReserva, btnVisualizarFeedbacks;
-    private TextView welcome;
+//    private Button btnAddEvento, btnConvidarBanda, btnLimparDev, btnCancelarReserva, btnVisualizarFeedbacks;
+    private TextView welcome, txtQtdReservas, txtQtdConvites, txtQtdFeedbacks, txtProxEvNomeData, txtProxEvQtdReserva;
+    private FloatingActionButton fabConvBanda, fabAdmReservas, fabCriarEvento, fabVisFeed;
+    private ProximoEventoModel pe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telaadmin);
 
-        btnAddEvento = (Button) findViewById(R.id.btnAddEvento);
-        btnConvidarBanda = (Button) findViewById(R.id.btnConvidarBanda);
-        btnVisualizarFeedbacks = (Button) findViewById(R.id.btnVisualizarFeedbacks);
-        btnCancelarReserva = (Button) findViewById(R.id.btnCancelarReserva);
+        txtQtdReservas = (TextView) findViewById(R.id.txtQtdReservas);
+        txtProxEvNomeData = (TextView) findViewById(R.id.txtProxEvNomeData);
+        txtProxEvQtdReserva = (TextView) findViewById(R.id.txtProxEvQtdReserva);
+        txtQtdFeedbacks = (TextView) findViewById(R.id.txtQtdFeedbacks);
+        txtQtdConvites = (TextView) findViewById(R.id.txtQtdConvites);
+        fabConvBanda = (FloatingActionButton) findViewById(R.id.fabConvBanda);
+        fabAdmReservas = (FloatingActionButton) findViewById(R.id.fabAdmReservas);
+        fabCriarEvento = (FloatingActionButton) findViewById(R.id.fabCriarEvento);
+        fabVisFeed = (FloatingActionButton) findViewById(R.id.fabVisFeed);
+
+
+        fabConvBanda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itAdmConvites = new Intent(telaadmin.this, telaadmin_eventos.class);
+                startActivity(itAdmConvites);
+            }
+        });
+
+        fabAdmReservas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                mostraReserva();
+                Intent itAdmReservas = new Intent(telaadmin.this, telaadmin_listareserva.class);
+                startActivity(itAdmReservas);
+            }
+        });
+
+        fabCriarEvento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abreCadastroEvento();
+            }
+        });
+
+        fabVisFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itAdmFeedbacks = new Intent(telaadmin.this, telaadmin_listafeedback.class);
+                startActivity(itAdmFeedbacks);
+            }
+        });
+
+        txtQtdReservas.setText(new ReservaRepo(getApplicationContext()).countReservaADM().toString());
+        txtQtdFeedbacks.setText(new FeedbackRepo(getApplicationContext()).countFeedbacksADM().toString());
+        txtQtdConvites.setText(new ApresentacaoRepo(getApplicationContext()).countConvitesAceitosADM().toString());
+
+        pe = new ProximoEventoModel();
+        pe = new ApresentacaoRepo(getApplicationContext()).getProxApresentacao();
+        if (pe.getCdevento() != null ) {
+            if (!pe.getCdevento().isEmpty()) {
+                txtProxEvNomeData.setText(pe.getNomeBanda() + " - " + pe.getDtEvento());
+                txtProxEvQtdReserva.setText("reservas feitas: " + pe.getQtdReserva());
+                txtProxEvQtdReserva.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //telareservasEv
+                        Intent itProxEv = new Intent(telaadmin.this, telaadmin_reservas_proxevento.class);
+                        itProxEv.putExtra("cdevento", pe.getCdevento());
+                        startActivity(itProxEv);
+                    }
+                });
+            } else {
+                txtProxEvNomeData.setText("não há eventos");
+                txtProxEvQtdReserva.setText("não há reservas");
+            }
+        }
+        else {
+            txtProxEvNomeData.setText("não há eventos");
+            txtProxEvQtdReserva.setText("não há reservas");
+        }
+
+//        btnAddEvento = (Button) findViewById(R.id.btnAddEvento);
+//        btnConvidarBanda = (Button) findViewById(R.id.btnConvidarBanda);
+//        btnVisualizarFeedbacks = (Button) findViewById(R.id.btnVisualizarFeedbacks);
+//        btnCancelarReserva = (Button) findViewById(R.id.btnCancelarReserva);
 //        btnLimparDev = (Button) findViewById(R.id.btnLimpar);
 
 //        btnLimparDev.setOnClickListener(new View.OnClickListener() {
@@ -57,41 +136,43 @@ public class telaadmin extends AppCompatActivity {
 //            }
 //        });
 
-        btnAddEvento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abreCadastroEvento();
-            }
-        });
 
-        btnConvidarBanda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent itAdmConvites = new Intent(telaadmin.this, telaadmin_eventos.class);
-                startActivity(itAdmConvites);
-            }
-        });
+//
+//        btnAddEvento.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                abreCadastroEvento();
+//            }
+//        });
+//
+//        btnConvidarBanda.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent itAdmConvites = new Intent(telaadmin.this, telaadmin_eventos.class);
+//                startActivity(itAdmConvites);
+//            }
+//        });
+//
+//        btnVisualizarFeedbacks.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent itAdmFeedbacks = new Intent(telaadmin.this, telaadmin_listafeedback.class);
+//                startActivity(itAdmFeedbacks);
+//            }
+//        });
+//
+//        btnCancelarReserva.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                mostraReserva();
+//                Intent itAdmReservas = new Intent(telaadmin.this, telaadmin_listareserva.class);
+//                startActivity(itAdmReservas);
+//            }
+//        });
 
-        btnVisualizarFeedbacks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent itAdmFeedbacks = new Intent(telaadmin.this, telaadmin_listafeedback.class);
-                startActivity(itAdmFeedbacks);
-            }
-        });
 
-        btnCancelarReserva.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                mostraReserva();
-                Intent itAdmReservas = new Intent(telaadmin.this, telaadmin_listareserva.class);
-                startActivity(itAdmReservas);
-            }
-        });
-
-
-        welcome = (TextView) findViewById(R.id.txtBoasVindas);
-        welcome.setText("Bem vindo "+getIntent().getExtras().get("nome")+"!\n           O que deseja fazer?");
+//        welcome = (TextView) findViewById(R.id.txtBoasVindas);
+//        welcome.setText("Bem vindo "+getIntent().getExtras().get("nome")+"!\n           O que deseja fazer?");
     }
 
     public void abreCadastroEvento()
@@ -194,3 +275,4 @@ public class telaadmin extends AppCompatActivity {
 
 
 }
+

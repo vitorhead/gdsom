@@ -19,7 +19,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Digite o nome da banda"
+                android:text="Digite o nome do artista"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/lblNome"
@@ -99,7 +99,7 @@
 
             <TextView
                 android:id="@+id/lblDescricao"
-                android:text="Use esse espaço para adicionar uma descrição para a banda!"
+                android:text="Use esse espaço para adicionar uma descrição!"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
@@ -132,7 +132,7 @@
 
             <TextView
                 android:id="@+id/lblSite"
-                android:text="Adicione o site da banda"
+                android:text="Adicione um site para divulgação ou contato"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/btnFoto"
-                android:text="CLIQUE E SELECIONE UMA FOTO PARA A BANDA"
+                android:text="CLIQUE E SELECIONE UMA FOTO PARA O CADASTRO"
                 android:layout_below="@id/txtSite" />
 
         </RelativeLayout>

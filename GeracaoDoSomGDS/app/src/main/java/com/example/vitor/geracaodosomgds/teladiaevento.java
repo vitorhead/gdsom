@@ -92,7 +92,7 @@ public class teladiaevento extends AppCompatActivity
                     {
                         List<ReservaModel> qtdeReservas = new ArrayList<ReservaModel>();
                         qtdeReservas = new ReservaRepo(getApplicationContext()).selectAllReservas(cdevento);
-                        if (qtdeReservas.size() > Integer.valueOf(qtdeingressos))
+                        if (qtdeReservas.size() >= Integer.valueOf(qtdeingressos))
                         {
                             Toast.makeText(getApplicationContext(), "Desculpe, atingimos o número maximo de reservas para esse evento =(", Toast.LENGTH_SHORT).show();
                         }

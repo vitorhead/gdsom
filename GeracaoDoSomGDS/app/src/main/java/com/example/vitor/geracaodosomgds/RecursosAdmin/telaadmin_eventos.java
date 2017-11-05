@@ -38,7 +38,7 @@ public class telaadmin_eventos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telaadmin_eventos);
-        getSupportActionBar().setTitle("CONVIDAR BANDA");
+        getSupportActionBar().setTitle("CONVIDAR ARTISTA");
 
         eventos = new EventoRepo(getApplicationContext()).selectAllEventos();
         myView = (RecyclerView) findViewById(R.id.recviewAdmin);
@@ -66,8 +66,8 @@ public class telaadmin_eventos extends AppCompatActivity {
     public void convidaBanda(final int cdEvento)
     {
         final AlertDialog.Builder b = new AlertDialog.Builder(this);
-        b.setTitle("CONVIDAR BANDA");
-        b.setMessage("Selecione abaixo a banda que deseja convidar para o evento escolhido");
+        b.setTitle("CONVIDAR ARTISTA");
+        b.setMessage("Selecione abaixo o artista que deseja convidar para o evento escolhido");
         LinearLayout ll_dialogo = new LinearLayout(this);
         ll_dialogo.setOrientation(LinearLayout.VERTICAL);
 
@@ -112,7 +112,7 @@ public class telaadmin_eventos extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Convite enviado!", Toast.LENGTH_SHORT).show();
                 }
                 else
-                    Toast.makeText(getApplicationContext(), "Convite já foi enviado para essa banda.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Convite já foi enviado.", Toast.LENGTH_SHORT).show();
             }
         });
 

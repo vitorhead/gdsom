@@ -204,4 +204,26 @@ public class BandaRepo
 
     }
     //para retornar todas, fazer com while !cursor.IsAfterLast
+
+    public Boolean emailCadastrado(String email)
+    {
+        Boolean bExiste = false;
+        try {
+            StringBuilder query = new StringBuilder();
+            query.append("SELECT login FROM dbo_gds_bandas WHERE (email = ? OR login = ?)");
+
+            Cursor cursor = sb.getConexaoDB().rawQuery(query.toString(), new String[]{email, email});
+            cursor.moveToFirst();
+
+            if (!cursor.isAfterLast()){
+                if (!cursor.getString(cursor.getColumnIndex("login")).isEmpty())
+                    bExiste = true;
+            }
+
+        }
+        finally {
+            sb.close();
+        }
+        return bExiste;
+    }
 }

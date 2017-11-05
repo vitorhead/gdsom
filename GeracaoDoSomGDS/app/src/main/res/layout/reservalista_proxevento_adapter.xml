@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/icons"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/chkReservaProxEvento"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nome"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        android:textSize="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:id="@+id/lblNome_ReservaProxEv"
+        android:layout_toRightOf="@+id/chkReservaProxEvento"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cpf"
+        android:textSize="16dp"
+        android:textColor="@color/secondary_text"
+        android:layout_marginLeft="16dp"
+        android:layout_below="@id/lblNome_ReservaProxEv"
+        android:id="@+id/lblCpf_ReservaProxEvento"
+        android:layout_toRightOf="@+id/chkReservaProxEvento"/>
+
+
+</RelativeLayout>

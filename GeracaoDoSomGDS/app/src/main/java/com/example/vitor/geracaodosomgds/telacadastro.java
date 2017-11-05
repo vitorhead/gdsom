@@ -39,7 +39,7 @@ public class telacadastro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_telacadastro);
-        getSupportActionBar().setTitle("CADASTRO DE BANDAS");
+        getSupportActionBar().setTitle("CADASTRO DE ARTISTAS");
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
 
         if (getIntent().getExtras() != null)
@@ -189,6 +189,12 @@ public class telacadastro extends AppCompatActivity {
                                     "     </div>" +
                                     "</body>" +
                                     "</html>";
+                if (new BandaRepo(getApplicationContext()).emailCadastrado(email))
+                {
+                    Toast.makeText(getApplicationContext(), "EMAIL JÁ CADASTRADO! FAÇA LOGIN", Toast.LENGTH_SHORT);
+                    finish();
+                }
+
                 bandaCadastrar.setLogin(email);
                 try{
                     senha = new StringToSHA1().SHA1(senha);

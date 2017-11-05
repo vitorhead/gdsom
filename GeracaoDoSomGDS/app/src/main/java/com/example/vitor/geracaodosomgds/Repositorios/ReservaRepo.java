@@ -32,6 +32,7 @@ public class ReservaRepo {
             values.put("cpf", r.getCpf());
             values.put("cdevento", r.getCdEvento());
             values.put("dtevento", r.getDtEvento());
+            values.put("compareceu", "N");
 
             sb.getConexaoDB().insert("dbo_gds_reservas", null, values);
         }
@@ -135,6 +136,79 @@ public class ReservaRepo {
 
             values.put("nome", nome);
             values.put("cpf", CPF);
+
+            sb.getConexaoDB().update("dbo_gds_reservas", values, "idreserva = ?", new String[]{idReserva});
+        }
+        finally {
+            sb.close();
+        }
+    }
+
+    public Integer countReservaADM()
+    {
+        Integer res = 0;
+        try {
+            StringBuilder query = new StringBuilder();
+            query.append(   "SELECT COUNT (*) count FROM dbo_gds_reservas " );
+            Cursor cursor = sb.getConexaoDB().rawQuery(query.toString(), null);
+            cursor.moveToFirst();
+
+            if (!cursor.isAfterLast())
+                res = cursor.getInt(cursor.getColumnIndex("count"));
+        }
+        finally {
+            sb.close();
+        }
+        return res;
+    }
+
+    public List<ReservaLista_Model> reservasProxEvento(String cdevento)
+    {
+        List<ReservaLista_Model> reservas = new ArrayList<>();
+        try {
+            StringBuilder query = new StringBuilder();
+            query.append(   "SELECT R.idreserva, R.nome, R.cpf, R.compareceu \n" +
+                            "FROM dbo_gds_reservas R\n" +
+                            "JOIN dbo_gds_apresentacoes A\n" +
+                            "ON A.cdevento = R.cdevento\n" +
+                            "JOIN dbo_gds_eventos E\n" +
+                            "ON E.cdevento = A.cdevento\n" +
+                            "WHERE E.cdevento = ? ");
+            String[] argumentos = new String[]{cdevento};
+            Cursor cursor = sb.getConexaoDB().rawQuery(query.toString(), argumentos);
+            cursor.moveToFirst();
+
+            ReservaLista_Model reservaModel;
+
+            while (!cursor.isAfterLast()) {
+                reservaModel = new ReservaLista_Model();
+                reservaModel.setIdReserva(cursor.getString(cursor.getColumnIndex("idreserva")));
+                reservaModel.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+                reservaModel.setCPF(cursor.getString(cursor.getColumnIndex("cpf")));
+                if (cursor.getString(cursor.getColumnIndex("compareceu")).equals("S"))
+                    reservaModel.setCheckBoxReserva(true);
+                else
+                    reservaModel.setCheckBoxReserva(false);
+                reservas.add(reservaModel);
+                cursor.moveToNext();
+            }
+        }
+        finally {
+            sb.close();
+        }
+        return reservas;
+    }
+
+    public void updateReservaCompareceu(String idReserva, Boolean compareceu)
+    {
+        try {
+            ContentValues values = new ContentValues();
+
+//            values.put("idreserva", idReserva);
+            if (compareceu)
+                values.put("compareceu", "S");
+            else
+                values.put("compareceu", "N");
 
             sb.getConexaoDB().update("dbo_gds_reservas", values, "idreserva = ?", new String[]{idReserva});
         }

@@ -84,7 +84,24 @@ public class FeedbackRepo {
         return fbs;
     }
 
+    public Integer countFeedbacksADM()
+    {
+        Integer res = 0;
+        try {
+            StringBuilder sql = new StringBuilder();
+            sql.append(" SELECT COUNT(*) count FROM dbo_gds_feedback ");
+            Cursor cursor = sb.getConexaoDB().rawQuery(sql.toString(), null);
+            cursor.moveToFirst();
 
+            if (!cursor.isAfterLast())
+                res = cursor.getInt(cursor.getColumnIndex("count"));
+        }
+        finally
+        {
+            sb.close();
+        }
+        return res;
+    }
     public List<FeedbackLista_Model> listaFeedbacks_ADM()
     {
         List<FeedbackLista_Model> fbs = new ArrayList<>();
@@ -104,7 +121,8 @@ public class FeedbackRepo {
                             "LEFT JOIN dbo_gds_bandas B\n" +
                             "ON B.login = A.login\n" +
                             "LEFT JOIN dbo_gds_eventos E\n" +
-                            "ON E.cdevento = A.cdevento" );
+                            "ON E.cdevento = A.cdevento"+
+                            " ORDER BY F.dt_feedback DESC ");
 
             Cursor cursor = sb.getConexaoDB().rawQuery(query.toString(), null);
 

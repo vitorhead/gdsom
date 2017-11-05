@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import com.example.vitor.geracaodosomgds.BancoDeDados.setupBanco;
 import com.example.vitor.geracaodosomgds.Modelos.ApresentacaoModel;
 import com.example.vitor.geracaodosomgds.Modelos.EventoModel;
+import com.example.vitor.geracaodosomgds.Modelos.ProximoEventoModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +96,26 @@ public class ApresentacaoRepo {
         return apresentacoes;
     }
 
+    public Integer countConvitesAceitosADM()
+    {
+        Integer res = 0;
+        try {
+            StringBuilder sql = new StringBuilder();
+            sql.append(" SELECT COUNT(*) count FROM dbo_gds_apresentacoes WHERE status = ? ");
+            String[] argumentos = {"S"};
+            Cursor cursor = sb.getConexaoDB().rawQuery(sql.toString(), argumentos);
+            cursor.moveToFirst();
+
+            if (!cursor.isAfterLast())
+                res = cursor.getInt(cursor.getColumnIndex("count"));
+
+        }
+        finally
+        {
+            sb.close();
+        }
+        return res;
+    }
 
     public List<String> retornaApresentacao(String cdevento)
     {
@@ -163,6 +184,37 @@ public class ApresentacaoRepo {
         values.put("status", a.getStatus());
         String[] argumentos = {a.getLogin()};
         sb.getConexaoDB().update("dbo_gds_apresentacoes", values, "login=?",argumentos);
+    }
+
+    public ProximoEventoModel getProxApresentacao()
+    {
+        ProximoEventoModel pe = new ProximoEventoModel();
+        try {
+            StringBuilder query = new StringBuilder();
+            query.append("SELECT E.cdevento, E.dtevento, B.nome, (SELECT COUNT (*) FROM dbo_gds_reservas R WHERE R.cdevento = E.cdevento) qtdreservas \n" +
+                    " FROM dbo_gds_eventos E\n" +
+                    " JOIN dbo_gds_apresentacoes A\n" +
+                    " ON a.cdevento = E.cdevento " +
+                    " JOIN dbo_gds_bandas B\n" +
+                    " ON B.login = A.login\n" +
+                    " WHERE A.status = ? "+
+                    " ORDER BY E.dtevento ASC ");
+            String[] argumentos = {"S"};
+            Cursor cursor = sb.getConexaoDB().rawQuery(query.toString(), argumentos);
+
+            cursor.moveToFirst();
+            if (!cursor.isAfterLast()) {
+                pe.setNomeBanda(cursor.getString(cursor.getColumnIndex("nome")));
+                pe.setDtEvento(cursor.getString(cursor.getColumnIndex("dtevento")));
+                pe.setQtdReserva(cursor.getString(cursor.getColumnIndex("qtdreservas")));
+                pe.setCdevento(cursor.getString(cursor.getColumnIndex("cdevento")));
+            }
+        }
+        finally {
+            sb.close();
+        }
+
+        return pe;
     }
 
 }

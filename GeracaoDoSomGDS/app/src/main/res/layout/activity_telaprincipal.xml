@@ -70,7 +70,7 @@
             android:layout_width="249dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="LOGIN DE BANDAS"
+            android:text="LOGIN DE ARTISTAS"
             android:textSize="18sp" />
     </LinearLayout>
 

@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/txtEmailBanda"
-        android:text="Email da Banda"
+        android:text="Email"
         android:layout_below="@+id/txtInfo"
         android:layout_marginTop="15dp"
         android:paddingLeft="8dp" />

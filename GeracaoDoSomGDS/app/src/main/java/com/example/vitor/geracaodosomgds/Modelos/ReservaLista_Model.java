@@ -11,6 +11,8 @@ public class ReservaLista_Model {
     private String nomeBanda;
     private String idReserva;
 
+    private Boolean checkBoxReserva; //pra usar so no proxevento
+
 
     public String getCPF() {
         return CPF;
@@ -50,5 +52,13 @@ public class ReservaLista_Model {
 
     public void setIdReserva(String idReserva) {
         this.idReserva = idReserva;
+    }
+
+    public Boolean getCheckBoxReserva() {
+        return checkBoxReserva;
+    }
+
+    public void setCheckBoxReserva(Boolean checkBoxReserva) {
+        this.checkBoxReserva = checkBoxReserva;
     }
 }

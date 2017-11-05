@@ -38,7 +38,7 @@ public class loginBanda extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_banda);
-        getSupportActionBar().setTitle("LOGIN DE BANDAS");
+        getSupportActionBar().setTitle("LOGIN DE ARTISTAS");
         txt1 = (EditText) findViewById(R.id.txtEmail);
         txt2 = (EditText) findViewById(R.id.txtSenha);
         btnEntrar = (Button) findViewById(R.id.btnEntrar);
