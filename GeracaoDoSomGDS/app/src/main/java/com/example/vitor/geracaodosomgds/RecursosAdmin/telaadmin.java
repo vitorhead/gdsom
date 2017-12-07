@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -186,9 +189,36 @@ public class telaadmin extends AppCompatActivity {
         lp.setMargins(80, 0, 80, 0);
 
         final EditText edtIngressos = new EditText(this);
-        edtIngressos.setHint("Quantidade máxima de ingressos");
+        edtIngressos.setHint("Quantidade de ingressos (de 10 a 100)");
+        edtIngressos.setInputType(InputType.TYPE_CLASS_NUMBER);
         edtIngressos.setSingleLine();
         edtIngressos.setTextSize(18f);
+        edtIngressos.setInputType(InputType.TYPE_CLASS_NUMBER );
+        InputFilter[] FilterArray = new InputFilter[1];
+        FilterArray[0] = new InputFilter.LengthFilter(2);
+        edtIngressos.setFilters(FilterArray);
+        edtIngressos.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                String sNum = edtIngressos.getText().toString().trim();
+//                if (!sNum.equals("")) {
+//                    int numero = Integer.parseInt(sNum);
+//
+//                    if ((numero > 100) || (numero < 10))
+//                        Toast.makeText(getApplicationContext(), "O máximo de ingressos é 100 e o mínimo 10!", Toast.LENGTH_SHORT).show();
+//                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         ll_dialogo.addView(edtIngressos, lp);
 
         final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -265,7 +295,7 @@ public class telaadmin extends AppCompatActivity {
         EventoModel em = new EventoModel();
         em.setQtdeIngressos(qtIng);
         em.setLoginAdmin(getIntent().getExtras().get("nome").toString());
-        em.setDtEvento(dt+" "+hr);
+        em.setDtEvento(dt + " " + hr);
         if (new EventoRepo(this).insertEvento(em) != -1)
             Toast.makeText(getApplicationContext(), "Evento criado!", Toast.LENGTH_SHORT).show();
         else
